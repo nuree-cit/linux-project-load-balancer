@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ "$(id -u)" -ne 0 ]]; then
+    echo "sudo privilege is required to run this script!"
+    exit 1
+fi
+echo
+echo "FILE TREE"
+tree /var/lib/webgen | head -8
+echo
+echo "SERVER TEST"
+cat /var/lib/webgen/documents/file-one
+cat /var/lib/webgen/documents/file-two
+echo
+echo "SYSTEM STATUS"
+echo "generate_index.service"
+systemctl status generate_index.service | grep -E -i "loaded|active|triggeredBy|systemd"
+echo
+echo "nginx.service"
+systemctl status nginx.service | grep -E -i "loaded|active|systemd"
+echo
+echo "generate_index.timer"
+systemctl status generate_index.timer | head -2 && systemctl status generate_index.timer | grep -E -i "generate"
