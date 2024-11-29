@@ -264,16 +264,21 @@ sudo ./linux-assignment3-part2/checkCheck
 
 **For the server 1**
 http://143.198.227.4/
+
 ![16](assets/16.png)
 
 **For the server 2**
 http://143.198.228.110/
+
 ![17](assets/17.png)
 
 **For the load balancer**
 http://24.199.68.62/
+
 ![18](assets/18.png)
+
 ![19](assets/19.png)
+
 If you click a refresh button few times, you will see the public IP address of server is changed from server 1 to 2, and 2 to 1.
 
 This is the evidence that the load balancer is managing incoming traffic between your server 1 and 2.
