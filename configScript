@@ -3,33 +3,7 @@
 if [[ "$(id -u)" -ne 0 ]]; then
     echo "sudo privilege is required to run this script!"
     exit 1
-elif [[ $# -eq 0 ]]; then
-    echo
-    echo "Options must be provided!"
-    echo
-    echo "  -1: For the first server"
-    echo
-    echo "  -2: For the second server"
-    echo
-    exit 1
-elif [[ $@ != -* ]]; then
-    echo "Options must start with '-'!"
-    exit 1
 fi
-
-while getopts "12" opt; do
-  case $opt in
-    1)
-        server=1
-    ;;
-    2)
-        server=2
-    ;;
-    ?)
-        exit 1
-    ;;  
-  esac
-done
 
 # It will install packages.
 #   - neovim
@@ -51,7 +25,9 @@ useradd -r -m -d /var/lib/webgen -s /usr/sbin/nologin webgen || { echo "adding s
 # create directories
 mkdir /var/lib/webgen/bin /var/lib/webgen/HTML /var/lib/webgen/documents || { echo "creating directories failed!"; exit 1; }
 # create files
-echo "hello this is file one from server ${server}" > /var/lib/webgen/documents/file-server-${server} || { echo "creating files failed!"; exit 1; }
+echo "hello this is file one" > /var/lib/webgen/documents/file-one || { echo "creating files failed!"; exit 1; }
+echo "hello this is file two" > /var/lib/webgen/documents/file-two || { echo "creating files failed!"; exit 1; }
+
 # move `generate_index` to the `/var/lib/webgen/bin`
 mv ./linux-assignment3-part2/packages/generate_index /var/lib/webgen/bin || { echo "moving generate_index failed!"; exit 1; }
 # change the permission of generate_index
@@ -74,3 +50,4 @@ systemctl enable --now generate_index.timer || { echo "enable and start timer fa
 systemctl start nginx.service || { echo "start nginx failed!"; exit 1; }
 echo
 echo "script finished!"
+echo

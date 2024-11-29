@@ -164,7 +164,7 @@ Host servername2 #choose the host name you want to use for the second server
 > [!IMPORTANT]
 > You need the `ipv4` ip address, not a `private IP`
 
-5-5. Save file and exit.
+5-6. Save file and exit.
 
 #### Now you are ready to connect your servers through `ssh`.
 
@@ -217,15 +217,8 @@ sudo chmod -R u+x ./linux-assignment3-part2
 7-1. Run the script `configScript`
 
 ```bash
-sudo ./linux-assignment3-part2/configScript -1
+sudo ./linux-assignment3-part2/configScript
 ```
-
-An option must be provided
-
--1: for the server 1
-
--2: for the server 2
-
 if you see:
 
 `script finished!`
@@ -240,13 +233,15 @@ sudo ./linux-assignment3-part2/checkCheck
 
 - This script will display some useful information to see if configuration has successfully finished.
 
+You will see the file tree like below:
 ![22](assets/22.png)
 
-    - show file tree of `/var/lib/webgen`
 
-    - print the test file `file-server-1` or `file-server-2` depends on which server are you at
+It will also print:
 
-    - show system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
+    - the contents of the test files
+
+    - the system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
 
 
 ## 8. Configuring for the second server.
@@ -254,7 +249,7 @@ sudo ./linux-assignment3-part2/checkCheck
 8-1. Repeat the tasks from the [Step 6](#6-connect-to-the-server-and-clone-necessary-files) for the server 2.
 
 > [!IMPORTANT]
-> Make sure you connect to the server 2 and run the `configScript` script with option `-2`  
+> Make sure you connect to the server 2
 
 ## 9. Check your configuration through accessing IP addresses.
 9-1. Go to the project in [DigitalOcean](https://cloud.digitalocean.com/)
@@ -269,21 +264,10 @@ http://143.198.227.4/
 
 ![16](assets/16.png)
 
-You can also check the file in the `/documents` directory through the web browser.
-It will show you which server are you at.
-
-http://143.198.227.4/documents
-
-![20](assets/20.png)
-
 **For the server 2**
 http://143.198.228.110/
 
 ![17](assets/17.png)
-
-http://143.198.228.110/documents
-
-![21](assets/21.png)
 
 **For the load balancer**
 http://24.199.68.62/
@@ -294,13 +278,15 @@ http://24.199.68.62/
 
 If you click a refresh button few times, you will see the public IP address of server is changed from server 1 to 2, and 2 to 1.
 
-You can also check the file through the load balancer
+This is the evidence that the load balancer is managing and distributing incoming traffic between your server 1 and 2.
+
+You can also check the files in the `/documents` directory through the load balancer.
 
 http://24.199.68.62/documents 
 
-This will also change the file by the time you clicking refresh button.
+![21](assets/21.png)
 
-This is the evidence that the load balancer is managing and distributing incoming traffic between your server 1 and 2.
+However, this will not change the files and contents even though you click refresh button many times because in real life, the web page will remain the same contents no matter which server you will be connected to.
 
 
 ## Congratulation! you have successfully created and configured new droplet servers with the load balancer!
