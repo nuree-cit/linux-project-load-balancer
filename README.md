@@ -81,7 +81,7 @@ Before you start, you must have:
 3-10. Choose **SSH Key** for the authentication method and connect keys you want to use.
 ![8](assets/8.png)
 > [!TIP]
-> Keep in mind which key you choose for the following [Step 5-2](#5-2-add-this-code-to-the-config-file)
+> Keep in mind which key you choose for the following [Step 5-2](#5-configure-ssh)
 
 3-11.  Make **2 Droplets**
 ![9](assets/9.png)
@@ -181,7 +181,7 @@ Host servername2 #choose the host name you want to use for the second server
 ```shell
 ssh servername
 ```
-- Change `servername` to your actual server name from [Step 5-2](#2-add-this-code-to-the-config-file) `config` file.
+- Change `servername` to your actual server name from [Step 5-2](#5-configure-ssh) `config` file.
 
 6.3. Update packages
 ```shell
