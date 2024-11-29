@@ -1,201 +1,265 @@
 # Linux Assignment 3 Part 2
 
-This assignment will help you to set up two droplet servers with a load balancer. 
+  
+This assignment will help you to set up two droplet servers with a load balancer.
+
 Then it will help you to configure each server setting up with the same steps in Linux Assignment 3 Part 1, by running automated scripts.
+
 To know more about what the scripts do, visit [linux-assignment3-part1](https://github.com/nuree-cit/linux-assignment3-part1)
 
+You must have:
+- Digital Ocean account
+- set up your ssh key within `config` file 
+
 ### **Please follow each process in order.**
+
 ## 1. Get the newest Arch Linux image
-### 1. Go to the Arch Linux download page [Arch Linux - Downloads](https://archlinux.org/download/)
-### 2. In the 'VM images' sector, click **git lab instance**
-### 3. Click the newest version of **images**
-### 4. Scroll down and find the file that contains **'cloudimg'** and **'.qcow2'** in the name.
-### 5. Download it.
-> [!TIP] 
+
+1-1. Go to the Arch Linux download page [Arch Linux - Downloads](https://archlinux.org/download/)
+
+1-2. In the 'VM images' sector, click **git lab instance**
+
+1-3. Click the newest version of **images**
+
+1-4. Scroll down and find the file that contains **'cloudimg'** and **'.qcow2'** in the name.
+
+1-5. Download it into your local device.
+
+> [!TIP]
 > **cloudimg** means that this file is optimized for the usage of cloud environment. 
-> **.qcow2** is one of the formats that is used for virtual disk. 
+> **.qcow2** is one of the formats that is used for virtual disk.
+
 ## 2. Create a new project
-### 1. Go to [DigitalOcean](https://cloud.digitalocean.com/) and log in.
+
+2-1. Go to [DigitalOcean](https://cloud.digitalocean.com/) and log in.
 ![1](assets/1.png)
-### 2. Click the **New Project** in the left side menu.
-### 3. Make a name
-### 4. Click the drop down menu and choose **Class project / Educational purposes**
-   
-> [!NOTE] 
-> Actually, it doesn't really matter what purpose you choose.
-### 5. Click green button **Create Project**
+
+2-2. Click the **New Project** in the left side menu.
+
+2-3. Make a name
+
+2-4. Click the drop down menu and choose a purpose
+- It doesn't really matter what purpose you choose.
+
+2-5. Click green button **Create Project**
 ![2](assets/2.png)
-### 6. Click **Skip for now**
+
+2-6. Click **Skip for now**
+
+  #### You will use this project to set up your droplet servers and a load balancer.
 
 ## 3. Create droplets
 ![3](assets/3.png)
-### 1. Click the **droplet name** you just created on the left side menu.
-### 2. Click the green button **Create**
-### 3. Click **Droplets**
+
+3-1. Click the **project name** you just created in [Step 2](#2-create-a-new-project) on the left side menu.
+
+3-2. Click the green button **Create**
+
+3-3. Click **Droplets**
 ![4](assets/4.png)
-### 4. Choose Region **San Francisco**
-### 5. Choose Datacenter **San Francisco Datacenter 3 SFO3**
-> [!TIP] 
-> **'SFO3'** is the closest datacenter to the end user, which is us
 
+3-4. Choose Region **San Francisco**
+
+3-5. Choose Datacenter **San Francisco Datacenter 3 SFO3**
+
+> [!TIP]
+> We choose **'SFO3'** because that is the closest data center to the end user, which is us.
+> 
+3-6. Click **Custom images**, and click **Add image**
 ![5](assets/5.png)
-### 6. Click **Custom images**, and click **Add image**
-![6](assets/6.png)
-### 7. Click **Upload Image** and upload the newest Arch Linux image that you have downloaded in the step 1.
 
-### 8. Choose the image you just uploaded
+3-7. Click **Upload Image** and upload the newest Arch Linux image that you have downloaded in the [Step 1](#1-get-the-newest-arch-linux-image).
+![6](assets/6.png)
+
+3-8. Choose the image you just uploaded
 ![7](assets/7.png)
-### 9. Choose CPU option you want
-### 10.   Choose **SSH Key** for the authentication method and connect keys you want to use.
+
+3-9. Choose CPU option you want
+> [!TIP]
+> The cheapest option is the left most one under the basic plan.
+
+3-10. Choose **SSH Key** for the authentication method and connect keys you want to use.
 ![8](assets/8.png)
-### 11.  Make **2 Droplets**
+> [!TIP]
+> Keep in mind which key you choose for the following [Step 5-2](#2-add-this-code-to-the-config-file)
+
+3-11.  Make **2 Droplets**
 ![9](assets/9.png)
-### 12.  Give them **Hostname**
-### 13.  Give them a tag **web**
-> [!IMPORTANT] 
+
+3-12.  Give them **Hostname**
+
+3-13.  Give them a tag **web**
+
+> [!IMPORTANT]
 > The tag **'web'** will be used for the load balancer to find which droplets to connect.
-### 14. Add to project you just created.
-### 15. Click green button **Create Droplet**
+
+3-14. Add to project you just created.
+
+3-15. Click the blue button **Create Droplet**
+
+  
 
 ## 4. Create a load balancer
-### 1. Click the green button **Create**
-### 2. Click **Load balancer**
+A load balancer is a device or software that stays between servers and internet, distributing network traffic across multiple servers to ensure no single server becomes overwhelmed.
+
+4-1. Click the green button **Create**
 ![10](assets/10.png)
-### 3. Choose a type as **Regional**
-### 4. Choose a datacenter in **San Francisco 3** 
+
+4-2. Click **Load balancer**
+
+4-3. Choose a type as **Regional**
 ![11](assets/11.png)
-### 5. Choose default VPC
-### 6. Choose Network Visibility **External(Public)**
-### 7. Connect droplets by giving a tag **'web'**
+
+4-4. Choose a datacenter in **San Francisco 3**
+
+4-5. Choose default VPC
+
+4-6. Choose Network Visibility **External(Public)**
+
+4-7. Connect droplets by giving a tag **'web'**
 ![12](assets/12.png)
-### 8. Choose a name for load balancer
-### 9. Select the right project
-### 10. Click **Create Load Balancer**
+
+4-8. Choose a name for load balancer
 ![13](assets/13.png)
+
+4-9. Select the right project
+
+4-10. Click **Create Load Balancer**
+
+  #### Now you finished setting up the load balancer.
+
 ## 5. Configure `ssh`
-### 1. Open the config file `C:/Users/username/.ssh/config`
-### 2. Add this to the `config` file
+
+5-1. Open the config file `C:/Users/username/.ssh/config`
+
+> [!NOTE]
+> The file path for `config` may differ depends on where you set.
+
+5-2. Add this code to the `config` file
+
 ```
-Host h1 #choose host name
-    HostName 24.199.114.110 #change it to the actual IP address
-    User arch
+
+Host h1 #choose the host name you want to use for the first server
+    HostName 24.199.114.110 #change it to the actual IP address of your first server from step 5-4.
+    User arch #
     PreferredAuthentications publickey
-    IdentityFile ~/.ssh/do-key
+    IdentityFile ~/.ssh/do-key #change it to your key from the step 3-10.
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
-Host h2 #choose host name
-    HostName 24.199.101.86 #change it to the actual IP address
+Host h1 #choose the host name you want to use for the second server
+    HostName 24.199.114.110 #change it to the actual IP address of your second server from step 5-4.
     User arch
     PreferredAuthentications publickey
     IdentityFile ~/.ssh/do-key
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 ```
-### 3. Choose **host name** for server 1 and server 2
-### 4. Get IP addresses from droplets
+
+5-3. Choose **host name** for server 1 and server 2
+
+5-4. Change ssh key file path.
+
+5-5. Get IP addresses from droplets
 ![14](assets/14.png)
-### 5. Change IP addresses after **HostName**
- > [!IMPORTANT] 
-> You may need to change key according to what keys you chose to connect in the step **3-11**.
-## 6. Clone necessary files
-### 1. In windows, open `powershell`
-### 2. Clone the repository
+
+#### Now you are ready to connect your servers through `ssh`.
+
+## 6. Connect to the server and clone necessary files
+
+> [!IMPORTANT]
+> From here, you will first work with your server 1 only.
+> For the server 2, you will be noticed when you need it.
+
+6-1. In windows, open `powershell`
+
+6-2. Connect to the server through `ssh`
+
+```shell
+ssh servername
 ```
+- Change `servername` to your actual server name from [Step 5-2](#2-add-this-code-to-the-config-file) `config` file.
+
+6-3. Download package `git`
+
+```shell
+sudo pacman -S --noconfirm git
+```
+> [!TIP]
+> If you see an error says `error: failed retrieving file`  from the step 6-3, run this code below.
+> 
+> `sudo pacman -Syu --noconfirm`
+> 
+> And then run the code in step 6-3 again.
+
+6-4. Clone repository
+
+```shell
 git clone https://github.com/nuree-cit/linux-assignment3-part2
 ```
- > [!IMPORTANT] 
-> Remember which folder you have stored cloning repository.
-## 7. Move files to the remote server
-### 1. Connect `sftp` to one of the server
-```
-sftp h1
-```
- > [!IMPORTANT] 
-> You should work in the same folder in the **step 7**.
-### 2. Make a remote directory
-```
-mkdir packages
-```
-### 3. Upload packages
-```
-put -r packages
-```
-### 4. Upload scripts
- ```
-put checkCheck
-put configScript
-put firstFirst
-```
- > [!NOTE] 
-> This will create a directory `packages` and put scripts in `/home/username/` by default.
-## 8. Prepare the scripts execution
-### 1. Access to the same server
-```
-ssh h1
-```
-### 2. Download `dos2unix`
-```bash
-sudo pacman -S --noconfirm dos2unix
-```
- > [!TIP] 
-> The `dos2unix` command makes it sure to fix line-ending format problems if they arise. 
-### 3. Transform script to Unix format
-```bash
-sudo dos2unix firstFirst
-```
-### 4. Change permission
-```bash
-sudo chmod u+x firstFirst
-```
-## 9. Run the scripts
- > [!IMPORTANT] 
-> You must run those scripts where they are placed with `sudo` permission.
-### 1. Run the script `firstFirst`
-```bash
-sudo ./firstFirst
-```
- > [!NOTE] 
-> This might takes time for the updating packages
+- This is the step you download the necessary code to your server.
 
-The script `firstFirst` does:
-- install packages
-	- neovim
-	- nginx
-	- tree
-- update all the installed packages
-- change scripts format to Unix
-	- generate_index
-	- checkCheck
-	- configScript
-- change files permission to be executable
-	- checkCheck
-	- configScript
-- change time zone
-	- America/Vancouver
+6-4. Update file permission
 
-### 2. run the script `configScript`
+```shell
+sudo chmod -R u+x ~/linux-assignment3-part2
+```
+
+#### Now you are ready to run automated configure scripts.
+
+## 7. Run the scripts
+
+> [!IMPORTANT]
+> You must run those scripts with `sudo` permission.
+
+7-1. Run the script `configScript`
+
 ```bash
+
 sudo ./configScript -1
+
 ```
-- an option must be provided
-	-1: for the first server
-	-2: for the second server
 
-	To know more about what `configScript` do, visit [linux-assignment3-part1](https://github.com/nuree-cit/linux-assignment3-part1)
+An option must be provided
 
-### 3. run the script `checkCheck
+-1: for the first server
+
+-2: for the second server
+
+  
+To know more about what `configScript` do, visit [linux-assignment3-part1](https://github.com/nuree-cit/linux-assignment3-part1)
+
+if you see:
+
+`script finished!`
+
+Your script finished its work successfully.
+
+7-2. run the script `checkCheck`
+
 ```bash
-sudo ./checkCheck
-```
-- This script will display some useful information to see if configuration has successfully finished.
-	- show fiile tree of `/var/lib/webgen`
-	- print contents of test files `file-one` and `file-two`
-	- show system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
 
-## 10. Repeat for the second server.
-### 1. Repeat the tasks from the **step 7** to **step 9** for the second server.
-### 2. make sure to use correct server name when use `sftp`, access through `ssh`, and give an option to a script.
+sudo ./checkCheck
+
+```
+
+- This script will display some useful information to see if configuration has successfully finished.
+
+    - show file tree of `/var/lib/webgen`
+
+    - print contents of test files `file-one` and `file-two`
+
+    - show system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
+
+  
+
+## 8. Configuring for the second server.
+
+8-1. Repeat the tasks from the [Step 6](#6-connect-to-the-server-and-clone-necessary-files) for the server 2.
+
+> [!IMPORTANT]
+> Make sure you connect to the server 2 and run the `configScript` script with option `-2`  
 
 ---
+
 ## Congratulation! you have successfully created and configured new droplet servers with the load balancer!
