@@ -234,6 +234,7 @@ sudo ./linux-assignment3-part2/checkCheck
 - This script will display some useful information to see if configuration has successfully finished.
 
 You will see the file tree like below:
+
 ![22](assets/22.png)
 
 
