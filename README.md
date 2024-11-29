@@ -240,9 +240,11 @@ sudo ./linux-assignment3-part2/checkCheck
 
 - This script will display some useful information to see if configuration has successfully finished.
 
+![22](assets/22.png)
+
     - show file tree of `/var/lib/webgen`
 
-    - print contents of test files `file-one` and `file-two`
+    - print the test file `file-server-1` or `file-server-2` depends on which server are you at
 
     - show system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
 
@@ -267,10 +269,21 @@ http://143.198.227.4/
 
 ![16](assets/16.png)
 
+You can also check the file in the `/documents` directory through the web browser.
+It will show you which server are you at.
+
+http://143.198.227.4/documents
+
+![20](assets/20.png)
+
 **For the server 2**
 http://143.198.228.110/
 
 ![17](assets/17.png)
+
+http://143.198.228.110/documents
+
+![21](assets/21.png)
 
 **For the load balancer**
 http://24.199.68.62/
@@ -281,6 +294,13 @@ http://24.199.68.62/
 
 If you click a refresh button few times, you will see the public IP address of server is changed from server 1 to 2, and 2 to 1.
 
-This is the evidence that the load balancer is managing incoming traffic between your server 1 and 2.
+You can also check the file through the load balancer
+
+http://24.199.68.62/documents 
+
+This will also change the file by the time you clicking refresh button.
+
+This is the evidence that the load balancer is managing and distributing incoming traffic between your server 1 and 2.
+
 
 ## Congratulation! you have successfully created and configured new droplet servers with the load balancer!
