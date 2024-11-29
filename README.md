@@ -5,11 +5,11 @@ This assignment will help you to set up two droplet servers with a load balancer
 
 Then it will help you to configure each server setting up with the same steps in Linux Assignment 3 Part 1, by running automated scripts.
 
-To know more about what the scripts do, visit [linux-assignment3-part1](https://github.com/nuree-cit/linux-assignment3-part1)
+To know more about what the scripts do, visit [linux-assignment3-part1](https://github.com/nuree-cit/linux-assignment3-part1). This scripts will do the tasks in the `README.md` for you.
 
-You must have:
+Before you start, you must have:
 - Digital Ocean account
-- set up your ssh key within `config` file 
+- ssh key setting within `config` file
 
 ### **Please follow each process in order.**
 
@@ -46,7 +46,7 @@ You must have:
 
 2-6. Click **Skip for now**
 
-  #### You will use this project to set up your droplet servers and a load balancer.
+#### You will use this project to set up your droplet servers and a load balancer.
 
 ## 3. Create droplets
 ![3](assets/3.png)
@@ -81,14 +81,14 @@ You must have:
 3-10. Choose **SSH Key** for the authentication method and connect keys you want to use.
 ![8](assets/8.png)
 > [!TIP]
-> Keep in mind which key you choose for the following [Step 5-2](#2-add-this-code-to-the-config-file)
+> Keep in mind which key you choose for the following [Step 5-2](#5-2-add-this-code-to-the-config-file)
 
 3-11.  Make **2 Droplets**
 ![9](assets/9.png)
 
 3-12.  Give them **Hostname**
 
-3-13.  Give them a tag **web**
+3-13.  Give them a tag **'web'**
 
 > [!IMPORTANT]
 > The tag **'web'** will be used for the load balancer to find which droplets to connect.
@@ -97,10 +97,10 @@ You must have:
 
 3-15. Click the blue button **Create Droplet**
 
-  
+#### Now you have created your droplet servers.
 
 ## 4. Create a load balancer
-A load balancer is a device or software that stays between servers and internet, distributing network traffic across multiple servers to ensure no single server becomes overwhelmed.
+A load balancer stays between servers and the internet, distributing network traffic across multiple servers to ensure no single server becomes overwhelmed.
 
 4-1. Click the green button **Create**
 ![10](assets/10.png)
@@ -122,7 +122,7 @@ A load balancer is a device or software that stays between servers and internet,
 4-8. Choose a name for load balancer
 ![13](assets/13.png)
 
-4-9. Select the right project
+4-9. Select the project
 
 4-10. Click **Create Load Balancer**
 
@@ -135,11 +135,10 @@ A load balancer is a device or software that stays between servers and internet,
 > [!NOTE]
 > The file path for `config` may differ depends on where you set.
 
-5-2. Add this code to the `config` file
+5-2. Add this code to the config file
 
 ```
-
-Host h1 #choose the host name you want to use for the first server
+Host servername1 #choose the host name you want to use for the first server
     HostName 24.199.114.110 #change it to the actual IP address of your first server from step 5-4.
     User arch #
     PreferredAuthentications publickey
@@ -147,7 +146,7 @@ Host h1 #choose the host name you want to use for the first server
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
-Host h1 #choose the host name you want to use for the second server
+Host servername2 #choose the host name you want to use for the second server
     HostName 24.199.114.110 #change it to the actual IP address of your second server from step 5-4.
     User arch
     PreferredAuthentications publickey
@@ -160,8 +159,12 @@ Host h1 #choose the host name you want to use for the second server
 
 5-4. Change ssh key file path.
 
-5-5. Get IP addresses from droplets
+5-5. Get IP addresses from droplets and change.
 ![14](assets/14.png)
+> [!IMPORTANT]
+> You need the `ipv4` ip address, not a `private IP`
+
+5-5. Save file and exit.
 
 #### Now you are ready to connect your servers through `ssh`.
 
@@ -201,7 +204,7 @@ git clone https://github.com/nuree-cit/linux-assignment3-part2
 6-6. Update file permission
 
 ```shell
-sudo chmod -R u+x ~/linux-assignment3-part2
+sudo chmod -R u+x ./linux-assignment3-part2
 ```
 
 #### Now you are ready to run automated configure scripts.
@@ -214,19 +217,14 @@ sudo chmod -R u+x ~/linux-assignment3-part2
 7-1. Run the script `configScript`
 
 ```bash
-
-sudo ~/linux-assignment3-part2/configScript -1
-
+sudo ./linux-assignment3-part2/configScript -1
 ```
 
 An option must be provided
 
--1: for the first server
+-1: for the server 1
 
--2: for the second server
-
-  
-To know more about what `configScript` do, visit [linux-assignment3-part1](https://github.com/nuree-cit/linux-assignment3-part1)
+-2: for the server 2
 
 if you see:
 
@@ -237,9 +235,7 @@ Your script finished its work successfully.
 7-2. run the script `checkCheck`
 
 ```bash
-
-sudo ~/linux-assignment3-part2/checkCheck
-
+sudo ./linux-assignment3-part2/checkCheck
 ```
 
 - This script will display some useful information to see if configuration has successfully finished.
@@ -250,7 +246,6 @@ sudo ~/linux-assignment3-part2/checkCheck
 
     - show system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
 
-  
 
 ## 8. Configuring for the second server.
 
@@ -259,6 +254,28 @@ sudo ~/linux-assignment3-part2/checkCheck
 > [!IMPORTANT]
 > Make sure you connect to the server 2 and run the `configScript` script with option `-2`  
 
----
+## 9. Check your configuration through accessing IP addresses.
+9-1. Go to the project in [DigitalOcean](https://cloud.digitalocean.com/)
+![15](assets/15.png)
+
+9-2. Check the IP addresses of **load balancer**, **server 1** and **server 2**
+
+9-3. Copy and paste each of the IP address to the web browser.
+
+**For the server 1**
+http://143.198.227.4/
+![16](assets/16.png)
+
+**For the server 2**
+http://143.198.228.110/
+![17](assets/17.png)
+
+**For the load balancer**
+http://24.199.68.62/
+![18](assets/18.png)
+![19](assets/19.png)
+If you click a refresh button few times, you will see the public IP address of server is changed from server 1 to 2, and 2 to 1.
+
+This is the evidence that the load balancer is managing incoming traffic between your server 1 and 2.
 
 ## Congratulation! you have successfully created and configured new droplet servers with the load balancer!
