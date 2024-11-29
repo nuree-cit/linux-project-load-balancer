@@ -54,19 +54,19 @@ mkdir /var/lib/webgen/bin /var/lib/webgen/HTML /var/lib/webgen/documents || { ec
 echo "hello this is file one from server ${server}" > /var/lib/webgen/documents/file-one || { echo "creating files failed!"; exit 1; }
 echo "hello this is file two from server ${server}" > /var/lib/webgen/documents/file-two || { echo "creating files failed!"; exit 1; }
 # move `generate_index` to the `/var/lib/webgen/bin`
-mv ~/linux-assignment3-part2/packages/generate_index /var/lib/webgen/bin || { echo "moving generate_index failed!"; exit 1; }
+mv ./linux-assignment3-part2/packages/generate_index /var/lib/webgen/bin || { echo "moving generate_index failed!"; exit 1; }
 # change the permission of generate_index
 chmod +x /var/lib/webgen/bin/generate_index || { echo "changing permission of generate_index failed!"; exit 1; }
 # change ownership to user webgen
 chown -R webgen:webgen /var/lib/webgen/ || { echo "changing ownership failed!"; exit 1; }
 # Move a service file service and timer and nginx.conf
-mv ~/linux-assignment3-part2/packages/generate_index.service /etc/systemd/system/generate_index.service || { echo "moving service failed!"; exit 1; }
-mv ~/linux-assignment3-part2/packages/generate_index.timer /etc/systemd/system/generate_index.timer || { echo "moving timer failed!"; exit 1; }
-mv ~/linux-assignment3-part2/packages/nginx.conf /etc/nginx/nginx.conf || { echo "moving nginx.conf failed!"; exit 1; }
+mv ./linux-assignment3-part2/packages/generate_index.service /etc/systemd/system/generate_index.service || { echo "moving service failed!"; exit 1; }
+mv ./linux-assignment3-part2/packages/generate_index.timer /etc/systemd/system/generate_index.timer || { echo "moving timer failed!"; exit 1; }
+mv ./linux-assignment3-part2/packages/nginx.conf /etc/nginx/nginx.conf || { echo "moving nginx.conf failed!"; exit 1; }
 # create directories for management
 mkdir /etc/nginx/sites-available /etc/nginx/sites-enabled || { echo "making directory failed!"; exit 1; }
 # move server block file
-mv ~/linux-assignment3-part2/packages/webgen.conf /etc/nginx/sites-available/webgen.conf || { echo "moving webgen.conf failed!"; exit 1; }
+mv ./linux-assignment3-part2/packages/webgen.conf /etc/nginx/sites-available/webgen.conf || { echo "moving webgen.conf failed!"; exit 1; }
 # enable and start
 ln -s /etc/nginx/sites-available/webgen.conf /etc/nginx/sites-enabled/webgen.conf >/dev/null || { echo "enable server block failed!"; exit 1; }
 systemctl daemon-reload || { echo "damon-reloading failed!"; exit 1; }

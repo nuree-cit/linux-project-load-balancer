@@ -180,26 +180,25 @@ ssh servername
 ```
 - Change `servername` to your actual server name from [Step 5-2](#2-add-this-code-to-the-config-file) `config` file.
 
-6-3. Download package `git`
+6.3. Update packages
+```shell
+sudo pacman -Syu --noconfirm
+```
+
+6-4. Download package `git`
 
 ```shell
 sudo pacman -S --noconfirm git
 ```
-> [!TIP]
-> If you see an error says `error: failed retrieving file`  from the step 6-3, run this code below.
-> 
-> `sudo pacman -Syu --noconfirm`
-> 
-> And then run the code in step 6-3 again.
 
-6-4. Clone repository
+6-5. Clone repository
 
 ```shell
 git clone https://github.com/nuree-cit/linux-assignment3-part2
 ```
 - This is the step you download the necessary code to your server.
 
-6-4. Update file permission
+6-6. Update file permission
 
 ```shell
 sudo chmod -R u+x ~/linux-assignment3-part2
@@ -216,7 +215,7 @@ sudo chmod -R u+x ~/linux-assignment3-part2
 
 ```bash
 
-sudo ./configScript -1
+sudo ~/linux-assignment3-part2/configScript -1
 
 ```
 
@@ -239,7 +238,7 @@ Your script finished its work successfully.
 
 ```bash
 
-sudo ./checkCheck
+sudo ~/linux-assignment3-part2/checkCheck
 
 ```
 
