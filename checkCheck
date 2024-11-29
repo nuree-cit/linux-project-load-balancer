@@ -9,8 +9,7 @@ echo "FILE TREE"
 tree /var/lib/webgen | head -8
 echo
 echo "SERVER TEST"
-cat /var/lib/webgen/documents/file-one
-cat /var/lib/webgen/documents/file-two
+ls /var/lib/webgen/documents/
 echo
 echo "SYSTEM STATUS"
 echo "generate_index.service"

@@ -51,8 +51,7 @@ useradd -r -m -d /var/lib/webgen -s /usr/sbin/nologin webgen || { echo "adding s
 # create directories
 mkdir /var/lib/webgen/bin /var/lib/webgen/HTML /var/lib/webgen/documents || { echo "creating directories failed!"; exit 1; }
 # create files
-echo "hello this is file one from server ${server}" > /var/lib/webgen/documents/file-one || { echo "creating files failed!"; exit 1; }
-echo "hello this is file two from server ${server}" > /var/lib/webgen/documents/file-two || { echo "creating files failed!"; exit 1; }
+echo "hello this is file one from server ${server}" > /var/lib/webgen/documents/file-server-${server} || { echo "creating files failed!"; exit 1; }
 # move `generate_index` to the `/var/lib/webgen/bin`
 mv ./linux-assignment3-part2/packages/generate_index /var/lib/webgen/bin || { echo "moving generate_index failed!"; exit 1; }
 # change the permission of generate_index
