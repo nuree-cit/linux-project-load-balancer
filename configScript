@@ -76,13 +76,15 @@ else
 fi
 
 # ufw setting
-ufw allow ssh
-ufw allow http
-ufw limit ssh 
-systemctl enable --now ufw.service
-echo "y" | ufw enable
+if ufw allow ssh &&
+ufw allow http &&
+ufw limit ssh &&
+systemctl enable --now ufw.service; then
 echo "ufw setting success!"
-
+else
+    echo "failed to setting ufw!"
+    exit 1
+fi
 echo
 echo "script finished!"
 echo
