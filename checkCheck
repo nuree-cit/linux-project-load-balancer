@@ -5,9 +5,6 @@ if [[ "$(id -u)" -ne 0 ]]; then
     exit 1
 fi
 
-# enabling ufw
-echo "y" | ufw enable
-
 echo
 echo "FILE TREE"
 tree /var/lib/webgen | head -8
@@ -26,5 +23,3 @@ echo
 echo "generate_index.timer"
 systemctl status generate_index.timer | head -2 && systemctl status generate_index.timer | grep -E -i "generate"
 echo
-echo "UFW STATUS"
-ufw status numbered

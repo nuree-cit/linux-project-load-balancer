@@ -183,25 +183,19 @@ ssh servername
 ```
 - Change `servername` to your actual server name from [Step 5-2](#5-configure-ssh) `config` file.
 
-6.3. Update packages
+6-3. Update packages and install `git`
 ```shell
-sudo pacman -Syu --noconfirm
+sudo pacman -Syu --noconfirm git
 ```
 
-6-4. Download package `git`
-
-```shell
-sudo pacman -S --noconfirm git
-```
-
-6-5. Clone repository
+6-4. Clone repository
 
 ```shell
 git clone https://github.com/nuree-cit/linux-assignment3-part2
 ```
 - This is the step you download the necessary code to your server.
 
-6-6. Update file permission
+6-5. Update file permission
 
 ```shell
 sudo chmod -R u+x ./linux-assignment3-part2
@@ -225,7 +219,7 @@ if you see:
 
 Your script finished its work successfully.
 
-7-2. run the script `checkCheck`
+7-2. Run the script `checkCheck`
 
 ```bash
 sudo ./linux-assignment3-part2/checkCheck
@@ -244,8 +238,6 @@ It will also print:
 
     - the system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
 
-    -  the `ufw` firewall status
-
 
 ## 8. Configuring for the second server.
 
@@ -254,13 +246,44 @@ It will also print:
 > [!IMPORTANT]
 > Make sure you connect to the server 2
 
-## 9. Check your configuration through accessing IP addresses.
-9-1. Go to the project in [DigitalOcean](https://cloud.digitalocean.com/)
+## 9. Unable `ufw`
+If you want to enable `ufw`, 
+
+9-1. Enable `ufw`
+```bash
+sudo ufw enable
+```
+
+if you see `Command may disrupt existing ssh connections. Proceed with operation (y|n)?`
+
+- type `y`
+
+9-2. reboot the system
+
+```bash
+sudo reboot
+```
+> [!IMPORTANT]
+> After setting up `ufw`, rebooting is needed to reload necessary kernel modules, and also to start enabled service.
+
+9-3. reconnect `ssh`
+
+```bash
+ssh servername
+```
+
+> [!NOTE]
+> This might take a few minutes to reboot the server in the droplets.
+
+Now your `ufw` is enabled!
+
+## 10. Check your configuration through accessing IP addresses.
+10-1. Go to the project in [DigitalOcean](https://cloud.digitalocean.com/)
 ![15](assets/15.png)
 
-9-2. Check the IP addresses of **load balancer**, **server 1** and **server 2**
+10-2. Check the IP addresses of **load balancer**, **server 1** and **server 2**
 
-9-3. Copy and paste each of the IP address to the web browser.
+10-3. Copy and paste each of the IP address to the web browser.
 
 **For the server 1**
 http://143.198.227.4/
