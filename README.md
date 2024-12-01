@@ -244,6 +244,8 @@ It will also print:
 
     - the system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
 
+    -  the `ufw` firewall status
+
 
 ## 8. Configuring for the second server.
 

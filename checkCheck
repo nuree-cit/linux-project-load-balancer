@@ -21,3 +21,6 @@ systemctl status nginx.service | grep -E -i "loaded|active|systemd"
 echo
 echo "generate_index.timer"
 systemctl status generate_index.timer | head -2 && systemctl status generate_index.timer | grep -E -i "generate"
+echo
+echo "UFW STATUS"
+ufw status numbered
