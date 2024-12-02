@@ -11,7 +11,31 @@ Before you start, you must have:
 - Digital Ocean account
 - ssh key setting within `config` file
 
+## Table of contents
+[Step 1. Get the newest Arch Linux image](#1-get-the-newest-arch-linux-image)
+
+[Step 2. Create a new project](#2-create-a-new-project)
+
+[Step 3. Create droplets](#3-create-droplets)
+
+[Step 4. Create a load balancer](#4-create-a-load-balancer)
+
+[Step 5. Configure ssh](#5-configure-ssh)
+
+[Step 6. Connect to the server and clone necessary files](#6-connect-to-the-server-and-clone-necessary-files)
+
+[Step 7. Run configuration scripts](#7-run-configuration-scripts)
+
+[Step 8. Enable ufw](#8-enable-ufw)
+
+[Step 9. Configuring for the second server](#9-configuring-for-the-second-server)
+
+[Step 10. Check your configuration through accessing IP addresses](#10-check-your-configuration-through-accessing-ip-addresses)
+
+
 ### **Please follow each process in order.**
+
+--- 
 
 ## 1. Get the newest Arch Linux image
 
@@ -128,7 +152,7 @@ A load balancer stays between servers and the internet, distributing network tra
 
   #### Now you finished setting up the load balancer.
 
-## 5. Configure `ssh`
+## 5. Configure ssh
 
 5-1. Open the config file `C:/Users/username/.ssh/config`
 
@@ -203,7 +227,7 @@ sudo chmod -R u+x ./linux-assignment3-part2
 
 #### Now you are ready to run automated configure scripts.
 
-## 7. Run the scripts
+## 7. Run configuration scripts
 
 > [!IMPORTANT]
 > You must run those scripts with `sudo` permission.
@@ -239,7 +263,7 @@ It will also print:
     - the system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
 
 
-## 8. Unable `ufw`
+## 8. Enable ufw
 If you want to enable `ufw`,
 
 8-1. reboot the system
@@ -250,8 +274,17 @@ sudo reboot
 > [!NOTE]
 > After setting up `ufw`, you want to reboot to make sure reloading necessary kernel modules.
 
+8-2. reconnect `ssh`
 
-8-2. Enable `ufw`
+```shell
+ssh servername
+```
+
+> [!NOTE]
+> This might take a few minutes to reboot the server in the droplets.
+
+
+8-3. Enable `ufw`
 
 ```shell
 sudo ufw enable
@@ -268,14 +301,6 @@ if you see `Command may disrupt existing ssh connections. Proceed with operation
 > 
 > port `22` is ssh, `80` is http.
 
-8-3. reconnect `ssh`
-
-```shell
-ssh servername
-```
-
-> [!NOTE]
-> This might take a few minutes to reboot the server in the droplets.
 
 8-4. check `ufw` 
 

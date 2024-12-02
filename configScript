@@ -5,6 +5,9 @@ if [[ "$(id -u)" -ne 0 ]]; then
     exit 1
 fi
 
+echo
+echo "Script is scripting ..."
+echo
 # It will install packages.
 #   - neovim
 #   - nginx
@@ -76,14 +79,15 @@ else
 fi
 
 # ufw setting
-if ufw allow ssh &&
-ufw allow http &&
-ufw limit ssh; then
-echo "ufw setting success!"
+if ufw allow ssh > /dev/null 2>&1 &&
+   ufw allow http > /dev/null 2>&1 &&
+   ufw limit ssh > /dev/null 2>&1; then
+    echo "ufw setting success!"
 else
     echo "failed to setting ufw!"
     exit 1
 fi
+
 echo
 echo "script finished!"
 echo
