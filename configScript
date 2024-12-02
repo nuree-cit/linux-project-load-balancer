@@ -71,7 +71,7 @@ if ln -s /etc/nginx/sites-available/webgen.conf /etc/nginx/sites-enabled/webgen.
 systemctl daemon-reload &&
 systemctl enable --now generate_index.service &&
 systemctl enable --now generate_index.timer &&
-systemctl start nginx.service; then
+systemctl enable --now nginx.service; then
     echo "configuration flies enabled!"
 else
     echo "failed to enable configuration flies!"
