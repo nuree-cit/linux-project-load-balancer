@@ -210,7 +210,7 @@ sudo chmod -R u+x ./linux-assignment3-part2
 
 7-1. Run the script `configScript`
 
-```bash
+```shell
 sudo ./linux-assignment3-part2/configScript
 ```
 if you see:
@@ -221,7 +221,7 @@ Your script finished its work successfully.
 
 7-2. Run the script `checkCheck`
 
-```bash
+```shell
 sudo ./linux-assignment3-part2/checkCheck
 ```
 
@@ -239,18 +239,21 @@ It will also print:
     - the system status and log of `generate_index.service`, `generate_index.timer` and `nginx.service`
 
 
-## 8. Configuring for the second server.
+## 8. Unable `ufw`
+If you want to enable `ufw`,
 
-8-1. Repeat the tasks from the [Step 6](#6-connect-to-the-server-and-clone-necessary-files) for the server 2.
+8-1. reboot the system
 
-> [!IMPORTANT]
-> Make sure you connect to the server 2
+```shell
+sudo reboot
+```
+> [!NOTE]
+> After setting up `ufw`, you want to reboot to make sure reloading necessary kernel modules.
 
-## 9. Unable `ufw`
-If you want to enable `ufw`, 
 
-9-1. Enable `ufw`
-```bash
+8-2. Enable `ufw`
+
+```shell
 sudo ufw enable
 ```
 
@@ -258,24 +261,38 @@ if you see `Command may disrupt existing ssh connections. Proceed with operation
 
 - type `y`
 
-9-2. reboot the system
-
-```bash
-sudo reboot
-```
 > [!IMPORTANT]
-> After setting up `ufw`, rebooting is needed to reload necessary kernel modules, and also to start enabled service.
+> If you didn't allow ssh connection, it may disconnect you from the current system that you are looking at now.
+> 
+> To check if you have allowed, `sudo ufw status`
+> 
+> port `22` is ssh, `80` is http.
 
-9-3. reconnect `ssh`
+8-3. reconnect `ssh`
 
-```bash
+```shell
 ssh servername
 ```
 
 > [!NOTE]
 > This might take a few minutes to reboot the server in the droplets.
 
+8-4. check `ufw` 
+
+```shell
+sudo ufw status
+```
+
 Now your `ufw` is enabled!
+
+
+## 9. Configuring for the second server.
+
+9-1. Repeat the tasks from the [Step 6](#6-connect-to-the-server-and-clone-necessary-files)  to Step 9 for the server 2.
+
+> [!IMPORTANT]
+> Make sure you work on the server 2
+
 
 ## 10. Check your configuration through accessing IP addresses.
 10-1. Go to the project in [DigitalOcean](https://cloud.digitalocean.com/)
@@ -312,7 +329,7 @@ http://24.199.68.62/documents
 
 ![21](assets/21.png)
 
-However, this will not change the files and contents even though you click refresh button many times because in real life, the web page will remain the same contents no matter which server you will be connected to.
+However, this will show the same contents even though you click refresh button many times because in real life, the web page will remain the same contents no matter which server you are connected to.
 
 
 ## Congratulation! you have successfully created and configured new droplet servers with the load balancer!
