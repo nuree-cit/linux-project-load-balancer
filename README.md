@@ -1,4 +1,4 @@
-# Linux Assignment 3 Part 2
+# Linux Project - Load Balancer
 
   
 This assignment will help you to set up two droplet servers with a load balancer.
